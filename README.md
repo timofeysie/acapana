@@ -1,3 +1,22 @@
+
+# Acapana
+
+A React app to consume serverless functions on AWS.
+
+## Beginning
+
+### the favicon, custom fonts
+
+
+The favicon was set up with the steps outlined [here](https://serverless-stack.com/chapters/add-app-favicons.html).  It calls for using this site:
+
+https://realfavicongenerator.net/
+
+
+
+#
+## Original Readme
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
