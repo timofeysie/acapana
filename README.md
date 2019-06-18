@@ -5,13 +5,17 @@ A React app to consume serverless functions on AWS.
 
 ## Beginning
 
-### the favicon, custom fonts
+### the favicon, custom fonts and Bootstrap
 
+Setting up the UI infrastructure at the start.
+
+We're using Serif (PT Serif) and Sans-Serif (Open Sans) typefaces served through Google Fonts.
 
 The favicon was set up with the steps outlined [here](https://serverless-stack.com/chapters/add-app-favicons.html).  It calls for using this site:
 
 https://realfavicongenerator.net/
 
+This all involves adding stuff to the public/index.html file, css etc.
 
 
 #
