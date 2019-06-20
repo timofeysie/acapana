@@ -5,6 +5,28 @@ A React app to consume serverless functions on AWS.
 
 ## Beginning
 
+
+### Setting up AWS
+
+There are three projects now that this application covers.
+
+The location of the service in the Calasasaya app is *us-east-1*.
+The location of the S3 bucket says *US East (N. Virginia)*.
+
+The Acapana app needs to have AWS configured in the (surprise!) config.js file.
+Which region should be used?  This is what the [article says](https://serverless-stack.com/chapters/create-an-s3-bucket-for-file-uploads.html)
+
+Other things needed for the config are:
+```
+YOUR_API_GATEWAY_REGION
+YOUR_API_GATEWAY_URL
+YOUR_COGNITO_REGION
+YOUR_COGNITO_USER_POOL_ID
+YOUR_COGNITO_APP_CLIENT_ID
+YOUR_IDENTITY_POOL_ID
+```
+
+
 ### the favicon, custom fonts and Bootstrap
 
 Setting up the UI infrastructure at the start.
