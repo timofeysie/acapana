@@ -37,6 +37,20 @@ Show 138 more frames
 
 Seems like an error, but the error alert will get triggered if the name or password is changed, so I suppose it's all good.  Something to figure out later.
 
+Our test user:
+```
+--username admin@example.com
+--password Passw0rd!
+```
+
+### Load the state from the session
+
+This section is not working as expected.  The logged in state does not want to be stored.
+This property does not get set:
+```
+this.state.isAuthenticated
+```
+
 
 
 ### the favicon, custom fonts and Bootstrap
