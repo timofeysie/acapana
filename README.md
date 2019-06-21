@@ -26,6 +26,18 @@ YOUR_COGNITO_APP_CLIENT_ID
 YOUR_IDENTITY_POOL_ID
 ```
 
+When logging in, despite a successful result, we get this in the console:
+```
+POST https://cognito-identity.us-east-1.amazonaws.com/ 400
+AWSPinpointProvider.js:341 Uncaught (in promise) Error: No credentials, applicationId or region
+    at AWSPinpointProvider.<anonymous> (AWSPinpointProvider.js:341)
+    ...
+Show 138 more frames
+```
+
+Seems like an error, but the error alert will get triggered if the name or password is changed, so I suppose it's all good.  Something to figure out later.
+
+
 
 ### the favicon, custom fonts and Bootstrap
 
