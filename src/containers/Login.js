@@ -27,12 +27,13 @@ export default class Login extends Component {
     event.preventDefault();
     try {
       await Auth.signIn(this.state.email, this.state.password);
-      alert('ogg in');
+      this.props.userHasAuthenticated(true);
+      this.props.history.push('/');
+      console.log('redirected');
     } catch (e) {
-      alert('error: '+e.message);
+      alert(e.message);
     }
   }
-
 
   render() {
     return (
