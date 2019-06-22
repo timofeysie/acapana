@@ -1,4 +1,3 @@
-
 # Acapana
 
 A React app to consume serverless functions on AWS.
