@@ -35,6 +35,13 @@ export default class Login extends Component {
       this.props.history.push("/");
     } catch (e) {
       alert(e.message);
+      if (e.message === 'User is not confirmed.') {
+        // redirect to submit confirmation code
+        this.props.history.push({
+          pathname: '/signup',
+          state: { attempted_email: this.state.email }
+        });
+      }
       this.setState({ isLoading: false });
     }
   }

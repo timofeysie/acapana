@@ -68,6 +68,8 @@ Our test user:
 Using an AWS User Pool where users sign in and sign up with their email as their username, the React app will use the Amplify lib to authenticate these users.
 
 
+
+
 ### Load the state from the session
 
 This section is not working as expected.  The logged in state does not want to be stored.
@@ -75,6 +77,27 @@ This property does not get set:
 ```
 this.state.isAuthenticated
 ```
+
+### Signup
+
+When implementing the signup functionality, we ran into an infinite spinner problem.
+Cognito sent the email to the test user with the authorization code, but the UI didn't recover from the call, so we would have to either create a new user or create a way to pick up where the app left off and enter the code to complete the sign up.
+
+The notes in the article at the bottom of this secion read:
+*If the user refreshes their page at the confirm step, they won’t be able to get back and confirm that account. It forces them to create a new account instead. We are keeping things intentionally simple but here are a couple of hints on how to fix it.*
+
+*Check for the UsernameExistsException in the handleSubmit method’s catch block. Use the Auth.resendSignUp() method to resend the code if the user has not been previously confirmed. Here is a link to the Amplify API docs. Confirm the code just as we did before.*
+
+
+Here is a way to manually confirm the user using the CLI:
+```
+aws cognito-idp admin-confirm-sign-up \
+   --region YOUR_COGNITO_REGION \
+   --user-pool-id YOUR_COGNITO_USER_POOL_ID \
+   --username YOUR_USER_EMAIL
+```
+
+You can also login to AWS and find the user pool and manually confirm the user there.
 
 
 ### the favicon, custom fonts and Bootstrap
@@ -105,7 +128,6 @@ I don't get to play with SVGs enough on the job, so I have to do a refresher eve
 ### viewBox
 *The viewBox is used to set an aspect ratio for the image, and have the drawing scale to fit.  The width is the width in user coordinates/px units, within the SVG code, that should be scaled to fill the width of the area into which you're drawing your SVG (the viewport in SVG lingo). Likewise, the height is the number of px/coordinates that should be scaled to fill the available height.*
 
-
 ### preserveAspectRatio
 *preserveAspectRatio describes how the image should scale if the aspect ratio of the viewBox doesn't match the aspect ratio of the viewport. Most of the time, the default behavior works pretty well: the image is scaled until it just fits both the height and width, and it is centered within any extra space.*
 
@@ -117,6 +139,10 @@ const SvgGlueStick = props => (
 
 So where is the viewBox?  Not sure.  Will work on the SVG later.  I've spent too much time on it right now.  Also, it is single lines.  We need to actually have boxes with fills so we can color it.  Add that to the list of things to do.
 
+The editor being used is [Inkscape]().  Haven't used the bloated Illustrator for a long time as Inkscape covers all the bases.  Anyhow, the method of creating a group of all the shapes in the picture, then manually change the width and height of the canvas in the documents modal works.
+
+In the .svg file it has:
+viewBox="0 0 254.0003 312.51116"
 
 
 #

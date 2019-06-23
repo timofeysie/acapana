@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Home.css";
-import GlueStick from '../Icons/GlueStick.js';
+import GlueStick2 from '../Icons/GlueStick2.js';
 
 export default class Home extends Component {
   render() {
@@ -8,7 +8,7 @@ export default class Home extends Component {
       <div className="Home">
         <div className="lander">
           <h1>Acapana</h1>
-          <GlueStick width="140px" height="140px" />
+          <GlueStick2 width="140px" height="140px" />
           <p>Create a list of WikiData items</p>
         </div>
       </div>
