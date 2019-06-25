@@ -99,6 +99,33 @@ aws cognito-idp admin-confirm-sign-up \
 
 You can also login to AWS and find the user pool and manually confirm the user there.
 
+The fix for Issue #9 is not complete.  Trying to login with the credentials created after refreshes the page due to the infinite spinner results in the following message: "User is not confirmed."
+At this point we can redirect the user to the signup page and preset the email so that the user can try again and we can further debug the root of this issue without having to either delete the user or create a new one and run out of active email addresses.
+
+### The Notes api
+
+Since the new notes page uses the API from the beginning of the series, it's time to get that working.  From the client, the network error is:
+```
+https://k7ixzm3zr0.execute-api.us-east-1.amazonaws.com/dev/notes
+Request Method: OPTIONS
+Status Code: 404
+```
+
+In the serverless command output, we see:
+```
+Serverless Error ---------------------------------------
+ServerlessError: The security token included in the request is invalid.
+```
+
+The server was showing a *agent is not authorized to perform: dynamodb:PutItem on resource: arn:aws:dynamodb:us-east-1:100641718971:table/notes*
+
+Added AmazonDynamoDBFullAccess policy in your role by going to "Permissions" tab in AWS console and the error changes to:
+```
+ValidationException: One or more parameter values were invalid: Missing the key nonteIdSortKey in the item
+```
+
+That is a not something in our project.  SO answers indicate it is a naming difference such as between Id and ID.  This problem needs to be solved in the backend project called Tiahuanaco.
+
 
 ### the favicon, custom fonts and Bootstrap
 
