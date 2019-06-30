@@ -25,6 +25,21 @@ Start the server:
 yarn start
 ```
 
+## Setting up Redux
+
+Following the method again from [the Valentino article](https://www.valentinog.com/blog/redux/).  If there are any problems, there is already a working example in the [Viracocha project](https://github.com/timofeysie/viracocha).
+
+Running Virachocha shows that our backend Request URL: http://radiant-springs-38893.herokuapp.com/api/list/en is returning a 503 'Service Unavailable' error.  Lucky we have a replacement now (at least for the main list).
+
+## Deploy the Frontend
+
+https://serverless-stack.com/chapters/deploy-the-frontend.html
+
+use S3 to host our assets,
+CloudFront CDN to serve it,
+Route 53 to manage our domain,
+Certificate Manager to handle our SSL certificate.
+
 
 ## Setting up AWS
 
@@ -124,7 +139,39 @@ Added AmazonDynamoDBFullAccess policy in your role by going to "Permissions" tab
 ValidationException: One or more parameter values were invalid: Missing the key nonteIdSortKey in the item
 ```
 
-That is a not something in our project.  SO answers indicate it is a naming difference such as between Id and ID.  This problem needs to be solved in the backend project called Tiahuanaco.
+That is a not something in our project.  SO answers indicate it is a naming difference such as between Id and ID.  This problem needs to be solved in the backend project called [Tiahuanaco](https://github.com/timofeysie/tiahuanaco) which is the server side of the Serverless Stack.
+
+The problem there was that nonteIdSortKey was used as the primary sort key.  I changed noteId to the misspelled one and now that part works, but there is a new error.
+
+Regarding the permissions error:
+An SO answer says: *I was using user pool id instead of identity pool id.*
+
+[Here](https://serverless-stack.com/chapters/create-a-cognito-user-pool.html) we created a Cognito User Pool.  We can see in our dashboard:
+```
+Pool Id us-east-1_y3LHvvlPG
+Pool ARN arn:aws:cognito-idp:us-east-1:100641718971:userpool/...
+```
+
+So actually I think it is a front end issue now.
+
+So check the settings and the articles:
+*userId is a Federated Identity id that comes in as a part of the request. This is set after our user has been authenticated via the User Pool. We are going to expand more on this in the coming chapters when we set up our Cognito Identity Pool. However, if you want to use the user’s User Pool user Id; take a look at the Mapping Cognito Identity Id and User Pool Id chapter.*
+
+For us that is
+```
+Pool Id us-east-1_y3LHvvlPG
+```
+
+Setting the IDENTITY_POOL_ID to the value of the Pool ARN on the dashboard produces this error:
+```
+Value 'arn:aws:cognito-idp:us-east-1:100641718971:userpool/us-east-1_y3LHvvlPG' at 'identityPoolId' failed to satisfy constraint: Member must have length less than or equal to 55
+```
+
+What is an identity pool? *identity pools provide temporary AWS credentials for users who are guests (unauthenticated) and for users who have been authenticated and received a token. An identity pool is a store of user identity data specific to your account.*
+
+Is it "User Pool(Identity Pool)" or "User Pool vs Identity Pool"?
+
+No, it's "Identity Pools (Federated Identities)".
 
 
 ### the favicon, custom fonts and Bootstrap
