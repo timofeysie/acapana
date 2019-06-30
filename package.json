@@ -34,6 +34,7 @@
     ]
   },
   "devDependencies": {
-    "@svgr/cli": "^4.3.0"
+    "@svgr/cli": "^4.3.0",
+    "redux": "^4.0.1"
   }
 }

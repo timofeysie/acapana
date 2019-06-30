@@ -31,14 +31,61 @@ Following the method again from [the Valentino article](https://www.valentinog.c
 
 Running Virachocha shows that our backend Request URL: http://radiant-springs-38893.herokuapp.com/api/list/en is returning a 503 'Service Unavailable' error.  Lucky we have a replacement now (at least for the main list).
 
+Step 1:  Install Redux.
+```
+npm i redux --save-dev
+```
+
+Step 2:  Create the store.
+
+The directory structure is slightly different.  
+The js directory has been renamed redux, so it will just be src/redux/store, etc.
+```
+mkdir -p src/js/store -> mkdir -p src/redux/store
+mkdir -p src/js/reducers -> mkdir -p src/redux/reducers
+mkdir -p src/js/actions -> mkdir -p src/redux/actions
+mkdir -p src/js/constants -> mkdir -p src/redux/constants
+```
+
+Then create another index in the js -> redux directory and use that in the src/index.js file.
+```
+src/js/index.js -> src/redux/index.js
+```
+
+The index.js file creates and exports the store.
+The state in redux comes from reducers which produce the state of the application.
+
+There are two key points for avoiding mutations in Redux:
+```
+Using concat(), slice(), and …spread for arrays
+Using Object.assign() and …spread for objects
+```
+
+
+### Console tests
+
+Open the developer tools and enter this in the console:
+```
+store.getState()
+store.subscribe(() => console.log('Fire whenever an action is dispatched'))
+store.dispatch( addArticle({ title: 'React Redux Tutorial for Beginners', id: 1 }) )
+```
+
+The add article is triggering the subscription, but the state is not being added to.  Running the add and the get again shows that the store is still empty so somethng is wrong here.
+
+
+
 ## Deploy the Frontend
 
 https://serverless-stack.com/chapters/deploy-the-frontend.html
 
-use S3 to host our assets,
-CloudFront CDN to serve it,
-Route 53 to manage our domain,
-Certificate Manager to handle our SSL certificate.
+The general steps for this include:
+* use S3 to host our assets,
+* CloudFront CDN to serve it,
+* Route 53 to manage our domain,
+* Certificate Manager to handle our SSL certificate.
+
+This is a work in progress.  With the IAM configuration issue and the beginning of Redux for this project, it might take some time to come back to the deployment.
 
 
 ## Setting up AWS
@@ -78,11 +125,10 @@ Our test user:
 --password Passw0rd!
 ```
 
+
 ## React and Cognito
 
 Using an AWS User Pool where users sign in and sign up with their email as their username, the React app will use the Amplify lib to authenticate these users.
-
-
 
 
 ### Load the state from the session
