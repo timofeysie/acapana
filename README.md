@@ -34,6 +34,7 @@ Running Virachocha shows that our backend Request URL: http://radiant-springs-38
 Step 1:  Install Redux.
 ```
 npm i redux --save-dev
+npm i react-redux --save-dev
 ```
 
 Step 2:  Create the store.
@@ -53,6 +54,12 @@ src/js/index.js -> src/redux/index.js
 ```
 
 The index.js file creates and exports the store.
+
+Import it now in the index.js file like this:
+```
+import store from ".redux/store/index";
+```
+
 The state in redux comes from reducers which produce the state of the application.
 
 There are two key points for avoiding mutations in Redux:
@@ -72,6 +79,43 @@ store.dispatch( addArticle({ title: 'React Redux Tutorial for Beginners', id: 1 
 ```
 
 The add article is triggering the subscription, but the state is not being added to.  Running the add and the get again shows that the store is still empty so somethng is wrong here.
+
+
+### Connecting React with Redux
+
+After importing a few things:
+```
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import store from "./store/index";
+import App from "./components/App.jsx";
+```
+
+The last one we are going to change, as our App file is already in './App'.
+
+The index.js file has to change from this:
+```
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+```
+
+To this:
+```
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+```
+
+render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+
 
 
 

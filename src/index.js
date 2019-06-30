@@ -8,6 +8,10 @@ import Amplify from "aws-amplify";
 import config from "./config";
 import index from "./redux/index";
 
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store/index";
+
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
@@ -32,11 +36,12 @@ Amplify.configure({
   }
 });
 
-
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 
