@@ -109,13 +109,52 @@ render(
   </Provider>,
 ```
 
+This seems to work.  Not sure if it's the best way to do it:
+```
 render(
   <Provider store={store}>
     <Router>
       <App />
     </Router>
   </Provider>,
+```
 
+After adding another page for the articles list, the navigation seems to be working.
+
+Then the next day only the logout nav item shows up.  I log out and back in and see the full list of nav items for a second, then it reverts back to the showing only the login choice.
+
+This error is in the console:
+```
+POST https://cognito-identity.us-east-1.amazonaws.com/ 400
+AWSPinpointProvider.js:341 Uncaught (in promise) Error: No credentials, applicationId or region
+    at AWSPinpointProvider.<anonymous> (AWSPinpointProvider.js:341)
+    at step (AWSPinpointProvider.js:134)
+    at Object.next (AWSPinpointProvider.js:65)
+    at fulfilled (AWSPinpointProvider.js:17)
+```
+
+When the nav menu items appear, they stay there.  Not sure what's going on.  Posting a new note causes a new CORS error.
+```
+2cognito-identity.us-east-1.amazonaws.com/:1 POST https://cognito-identity.us-east-1.amazonaws.com/ 400
+AWSPinpointProvider.js:341 Uncaught (in promise) Error: No credentials, applicationId or region
+    at AWSPinpointProvider.<anonymous> (AWSPinpointProvider.js:341)
+    ...
+(anonymous) @ AWSPinpointProvider.js:341
+...
+Show 12 more frames
+notes/new:1 Access to XMLHttpRequest at 'https://k7ixzm3zr0.execute-api.us-east-1.amazonaws.com/dev/notes' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+At least that should be easy to fix, but will be done on the server side code.
+
+But we are here to set up redux, so on with that for now and deal with the network errors a little later.
+
+
+### The list of articles
+
+After installing the react debugging tools via the official [instructions](https://github.com/zalmoxisus/redux-devtools-extension#usage), the new articles can be seen in the action, but the store is not changed.
+
+Also, the keyboard import on the form component started to fail.  Not kidding, the only way I could fill the input was with the arrows keys and return to submit previous values.
 
 
 
