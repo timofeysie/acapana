@@ -34,6 +34,7 @@ class ConnectedForm extends Component {
         <div className="form-group">
           <label htmlFor="title">Title</label>
           <input
+            type="text"
             className="form-control"
             id="title"
             value={title}

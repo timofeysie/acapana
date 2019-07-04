@@ -154,8 +154,26 @@ But we are here to set up redux, so on with that for now and deal with the netwo
 
 After installing the react debugging tools via the official [instructions](https://github.com/zalmoxisus/redux-devtools-extension#usage), the new articles can be seen in the action, but the store is not changed.
 
-Also, the keyboard import on the form component started to fail.  Not kidding, the only way I could fill the input was with the arrows keys and return to submit previous values.
+Also, the keyboard import on the form component started to fail.  Not kidding, the only way I could fill the input was with the arrows keys and return to submit previous values.  Closing that tab and running the app in another fixed the issue.
 
+
+### Add middleware to filter input
+
+A Redux middleware is a function that is able to intercept, and act accordingly, our actions, before they reach the reducer.
+
+The benefits from using a Redux middleware are:
+* the logic can live outside React (or any other library/framework)
+* middlewares become reusable pieces of logic, easily to reason about
+* middlewares can be tested in isolation
+* we keep the components clean
+
+You cannot call fetch from within an action creator in Redux. If you do you get this error:
+“Error: Actions must be plain objects. Use custom middleware for async actions”.
+
+
+### redux-thunk
+
+For making things work we redux-thunk, a custom middleware.
 
 
 ## Deploy the Frontend
