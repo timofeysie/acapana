@@ -171,9 +171,22 @@ You cannot call fetch from within an action creator in Redux. If you do you get 
 “Error: Actions must be plain objects. Use custom middleware for async actions”.
 
 
+asynchronous middleware actions with Redux Thunk
+
 ### redux-thunk
 
 For making things work we redux-thunk, a custom middleware.
+```
+npm i redux-thunk --save-dev
+```
+
+Load the middleware in /store/index.js.
+Create a getData in /actions/index.js makes the fetch.
+Update the reducer with the new action type in /reducers/index.js.
+Make a Post component to hold the list.
+
+
+If we need to we can use Redux Saga which is a more feature rich and as the article says, *asynchronous actions can be trickier to test and organize*.
 
 
 ## Deploy the Frontend
