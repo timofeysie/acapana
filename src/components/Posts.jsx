@@ -13,7 +13,8 @@ export class Post extends Component {
       <ul className="list-group list-group-flush">
         {this.props.articles.map(el => (
           <li className="list-group-item" key={el.id}>
-            {el.title}
+            {el.fallaciesLabel.value}
+            {el.fallaciesLabel.fallaciesDescription ? <span>&nbsp;: {el.fallaciesLabel.fallaciesDescription}</span> : null}
           </li>
         ))}
       </ul>

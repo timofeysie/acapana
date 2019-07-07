@@ -188,6 +188,11 @@ Make a Post component to hold the list.
 
 If we need to we can use Redux Saga which is a more feature rich and as the article says, *asynchronous actions can be trickier to test and organize*.
 
+Using our Calasasaya API call is causing either a 403 or a 502.
+403 is forbidden, and 502 is "Bad Gateway error" which is an HTTP status code that means *one server on the internet received an invalid response from another server*.
+
+That because the backend first assembles the SPAQL WikiData query to make and then does the call, which is failing.  So what's going on there?
+
 
 ## Deploy the Frontend
 

@@ -7,10 +7,10 @@ export function addArticle(payload) {
 
 export function getData() {
   return function(dispatch) {
-    return fetch("https://jsonplaceholder.typicode.com/posts")
+    return fetch("https://query.wikidata.org/sparql?format=json&query=%0A%20%20%20%20%20%20%20%20SELECT%20%3Ffallacies%20%3FfallaciesLabel%20%3FfallaciesDescription%20WHERE%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ffallacies%20wdt%3AP31%20wd%3AQ186150.%0A%20%20%20%20%20%20%20%20%7D%0A%09%09LIMIT%201000")
       .then(response => response.json())
       .then(json => {
-        dispatch({ type: DATA_LOADED, payload: json });
+        dispatch({ type: DATA_LOADED, payload: json.results.bindings });
       });
   };
 }
