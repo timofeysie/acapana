@@ -1,8 +1,16 @@
 import { ADD_ARTICLE } from "../constants/action-types";
 import { DATA_LOADED } from "../constants/action-types";
+import { CONSTRUCTED_LIST_OF_SPARQL } from "../constants/action-types";
+import { CONSTRUCTED_ITEM_CODE_SPARQL } from "../constants/action-types";
 
 export function addArticle(payload) {
   return { type: ADD_ARTICLE, payload };
+}
+export function getList(payload) {
+  return { type: CONSTRUCTED_LIST_OF_SPARQL, payload };
+}
+export function getItemCode(payload) {
+  return { type: CONSTRUCTED_ITEM_CODE_SPARQL, payload };
 }
 
 export function getData() {
