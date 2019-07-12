@@ -2,6 +2,7 @@ import { ADD_ARTICLE } from "../constants/action-types";
 import { DATA_LOADED } from "../constants/action-types";
 import { CONSTRUCTED_LIST_OF_SPARQL } from "../constants/action-types";
 import { CONSTRUCTED_ITEM_CODE_SPARQL } from "../constants/action-types";
+import { ITEM_CODE_LOADED } from "../constants/action-types";
 
 export function addArticle(payload) {
   return { type: ADD_ARTICLE, payload };
@@ -19,6 +20,16 @@ export function getData() {
       .then(response => response.json())
       .then(json => {
         dispatch({ type: DATA_LOADED, payload: json.results.bindings });
+      });
+  };
+}
+
+export function getItemCodeData(itemCodeSparql) {
+  return function(dispatch) {
+    return fetch("itemCodeSparql")
+      .then(response => response.json())
+      .then(json => {
+        dispatch({ type: ITEM_CODE_LOADED, payload: json.results.bindings });
       });
   };
 }

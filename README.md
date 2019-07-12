@@ -25,6 +25,41 @@ Start the server:
 yarn start
 ```
 
+
+## Making a SPARQL call
+
+The general idea is to take the input from the article page and construct a SPARQL query.  Make the API call and get the Q-code from the response to then construct a new SPARQL query using the code and the input to get a list of items from the *second* query and display that as the list of articles.
+Then, the user can switch between the categories of articles to display each list.
+Once we add error handling and local storage, we can modify the style of items based on viewing history and save the state under a user account so that they can get the list and state from any device.
+
+So it seems like a simple function, but could actually take some time so I will break it up into various tasks.  The first step was to create some constants and the middleware to construct the SPARQLs.  That was done in this commit [edee6573541ff9278530b0cc418be8ab84453887](https://github.com/timofeysie/acapana/commit/edee6573541ff9278530b0cc418be8ab84453887).
+
+Next we need to call those when an article is created and send them to their respective actions to kick off the get list functionality.
+
+To call the functions in our middleware:
+```
+export function constructListOfSparql({ dispatch }) {
+```
+
+Then the action.
+```
+export function getItemCode(itemCodeSparql) {
+  return function(dispatch) {
+    return fetch("itemCodeSparql")
+      .then(response => response.json())
+      .then(json => {
+        dispatch({ type: ITEM_CODE_LOADED, payload: json.results.bindings });
+      });
+  };
+}
+```
+
+Then us our function in the reducer:
+```
+import { constructListOfSparql } from "../middleware";
+```
+
+
 ## Setting up Redux
 
 Following the method again from [the Valentino article](https://www.valentinog.com/blog/redux/).  If there are any problems, there is already a working example in the [Viracocha project](https://github.com/timofeysie/viracocha).
