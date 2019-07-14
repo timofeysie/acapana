@@ -26,6 +26,62 @@ yarn start
 ```
 
 
+## Unit tests
+
+It's been a while since the tests were run in the project.  After getting halfway with the new SPARQL calls, spending some time with the same objective in an Electron app ended with either broken tests or a broken build.  Running the tests back in this project has the following output:
+```
+PASS  src/App.test.js (90.751s)
+ ✓ renders without crashing (563ms)
+ console.error node_modules/jsdom/lib/jsdom/virtual-console.js:29
+   Error: Not implemented: window.alert
+       at module.exports ...
+ console.error node_modules/react-dom/cjs/react-dom.development.js:506
+   Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+       in App (created by Route)
+       ...
+Tests:       1 passed, 1 total
+Time:        199.258s
+```
+
+Not even sure if this is a problem, but normally with a passing test, there aren't any errors in the terminal.  The tests took quite a long time to run as well.  
+
+This is after updating the App.test.js file.  Out of the box with the create-react-app method, the single test comes with a basic creating smoke test.
+
+After adding Redux and routing, the <App> tag has been surrounded by those.  Without changing anything, the test fails like this:
+```
+FAIL  src/App.test.js (30.849s)
+ ✕ renders without crashing (143ms)
+ ● renders without crashing
+   Invariant Violation: You should not use <Route> or withRouter() outside a <Router>
+      5 | it('renders without crashing', () => {
+      6 |   const div = document.createElement('div');
+   >  7 |   ReactDOM.render(<App />, div);
+     at invariant (node_modules/invariant/invariant.js:40:15)
+```
+
+Getting on with testing, the very first test in the official Redux testing docs is an action test.
+
+How is the add article action used in the app?  Like this, in Form.jsx:
+```
+function mapDispatchToProps(dispatch) {
+  return {
+    addArticle: article => dispatch(addArticle(article))
+  };
+}
+```
+
+And then in the handleSubmit function:
+```
+this.props.addArticle({ title, id });
+```
+
+Here is how to test that:
+```
+```
+
+
+
+
 ## Making a SPARQL call
 
 The general idea is to take the input from the article page and construct a SPARQL query.  Make the API call and get the Q-code from the response to then construct a new SPARQL query using the code and the input to get a list of items from the *second* query and display that as the list of articles.
