@@ -77,7 +77,18 @@ this.props.addArticle({ title, id });
 
 Here is how to test that:
 ```
+const payload = 'Add works'
+const expectedAction = {
+  type: ADD_ARTICLE,
+  payload
+}
 ```
+
+The other basic actions we have can be tested in the same way.
+
+For the getData action, which does a fetch API call, this is what the docs say:
+*For async action creators using thunk or other middleware, it's best to completely mock the Redux store for tests. You can apply the middleware to a mock store using redux-mock-store. You can also use fetch-mock to mock the HTTP requests.*
+
 
 
 

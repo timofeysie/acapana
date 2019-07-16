@@ -26,7 +26,7 @@ export function getData() {
 
 export function getItemCodeData(itemCodeSparql) {
   return function(dispatch) {
-    return fetch("itemCodeSparql")
+    return fetch(itemCodeSparql)
       .then(response => response.json())
       .then(json => {
         dispatch({ type: ITEM_CODE_LOADED, payload: json.results.bindings });
