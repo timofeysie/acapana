@@ -1,5 +1,8 @@
 import { ADD_ARTICLE } from "../constants/action-types";
 import { DATA_LOADED } from "../constants/action-types";
+import { CONSTRUCTED_LIST_OF_SPARQL } from "../constants/action-types";
+import { CONSTRUCTED_ITEM_CODE_SPARQL } from "../constants/action-types";
+import { getItemCodeData } from '../actions/index';
 
 const initialState = {
   articles: [],
@@ -16,6 +19,13 @@ function rootReducer(state = initialState, action) {
     return Object.assign({}, state, {
       remoteArticles: state.remoteArticles.concat(action.payload)
     });
+  }
+  if (action.type === CONSTRUCTED_LIST_OF_SPARQL) {
+    console.log('yay CONSTRUCTED_LIST_OF_SPARQL',action.payload);
+    getItemCodeData(action.payload);
+  }
+  if (action.type === CONSTRUCTED_ITEM_CODE_SPARQL) {
+    console.log('yay CONSTRUCTED_ITEM_CODE_SPARQL');
   }
   return state;
 }

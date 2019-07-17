@@ -85,6 +85,45 @@ Where does redux/index.js fit in?
 window.addArticle = addArticle;
 ```
 
+There is no reducer for the bad words middleware.  The reducer is only going to update the state.
+
+Anyhow, we need to slip in our new functionality.
+```
+if (action.type === CONSTRUCTED_LIST_OF_SPARQL)
+```
+
+But actually, I'm not sure at what point the middle steps in.  Before the action or after it?
+
+And then, we have the SPARQL to run in an action:
+```
+export function getItemCodeData(itemCodeSparql) {
+```
+
+So we can do something like this:
+```
+this.props.getItemCodeData(action.payload);
+```
+
+That would be great if we were in a a page.  But in the middleware there is no this.props.  Actually this may be what redux sagas are for.  Too bad we're using thunk instead because it's simpler.
+
+The spec just imports the function from index and uses it there, but trying that with the get item code data function causes the following error:
+```
+Failed to compile.
+./src/redux/reducers/index.js
+Attempted import error: 'getItemCodeData' is not exported from './index'.
+```
+
+I'm sorry, but it is being imported:
+```
+export function getItemCodeData(itemCodeSparql) {
+```
+
+The import statement was the issued:
+```
+import { getItemCodeData } from '../actions/index';
+```
+
+Now the flow gets to getItemCodeData() but dispatch inside the fetch statement is never called.
 
 
 
