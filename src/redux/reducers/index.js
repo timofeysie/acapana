@@ -11,6 +11,7 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   if (action.type === ADD_ARTICLE) {
+    console.log('add',action.payload);
     return Object.assign({}, state, {
       articles: state.articles.concat(action.payload)
     });
@@ -21,7 +22,7 @@ function rootReducer(state = initialState, action) {
     });
   }
   if (action.type === CONSTRUCTED_LIST_OF_SPARQL) {
-    console.log('yay CONSTRUCTED_LIST_OF_SPARQL',action.payload);
+    console.log('reducer CONSTRUCTED_LIST_OF_SPARQL',action.payload);
     getItemCodeData(action.payload);
   }
   if (action.type === CONSTRUCTED_ITEM_CODE_SPARQL) {

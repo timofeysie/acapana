@@ -47,8 +47,13 @@ As well as this we want to preserve the first functionality which is to add it t
 Let's track what should happen with the current workflow of addArticle.
 
 Redux goes like this:
+
 Action -> Reducer -> Store
+
+or
+
 Action -> Effect -> State result action -> Reducer -> Store
+
 
 On either end of that chain, is the UI.  The UI lets the user call the addArticle function from the form submit button.
 
@@ -123,7 +128,16 @@ The import statement was the issued:
 import { getItemCodeData } from '../actions/index';
 ```
 
-Now the flow gets to getItemCodeData() but dispatch inside the fetch statement is never called.
+Now the flow gets to getItemCodeData() but dispatch inside the fetch statement is never called.  A quick google turns up this advice: *You forgot to add dispatch method to trigger action*.  But where the action needs to be dispatched does not have access to dispatch, which is
+
+If the proper or for flow is:
+
+UI -> Action -> Reducer -> Store
+
+
+We are actually calling action from the reducer.  We should be clear about the order of execution here.
+
+
 
 
 

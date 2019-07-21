@@ -25,10 +25,13 @@ export function getData() {
 }
 
 export function getItemCodeData(itemCodeSparql) {
+  console.log('action getItemCodeData');
   return function(dispatch) {
+    console.log('locks');
     return fetch(itemCodeSparql)
       .then(response => response.json())
       .then(json => {
+        console.log('gold');
         dispatch({ type: ITEM_CODE_LOADED, payload: json.results.bindings });
       });
   };
