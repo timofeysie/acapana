@@ -134,10 +134,13 @@ If the proper or for flow is:
 
 UI -> Action -> Reducer -> Store
 
-
 We are actually calling action from the reducer.  We should be clear about the order of execution here.
 
-
+Redux/index.js: window.addArticle = addArticle;
+UI: Form.jsx calls this.props.addArticle({ title, id });
+Action: function addArticle(payload) {return { type: ADD_ARTICLE, payload };
+Reducer:
+Store
 
 
 
